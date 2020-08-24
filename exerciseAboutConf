@@ -1,0 +1,45 @@
+import java.util.Arrays;
+
+public class StartApp {
+    public static void main(String[] args) {
+
+        int[][] list = {{1, 10}, {2, 5}, {5, 6}, {1, 4}, {3, 8}};
+        System.out.println(Arrays.toString(zadachaConf(list)));
+
+
+    }
+
+    public static int[] zadachaConf(int[][] time) {
+
+        int[] counter = new int[time.length];
+        for (int indexI = 0; indexI < time.length; indexI++) {
+            int startTimeI = time[indexI][0];
+            int endTimeI = time[indexI][1];
+            int counterOnlineUser = 0;
+
+            for (int indexK = 0; indexK < time.length; indexK++) {
+                int startTimeK = time[indexK][0];
+                int endTimeK = time[indexK][1];
+                if (indexI == indexK) {
+                    continue;
+                }
+                if (startTimeI >= startTimeK && startTimeI <= endTimeK) {
+                    if (endTimeI <= endTimeK) {
+                        counterOnlineUser++;
+                    } else if (endTimeI >= endTimeK) {
+                        counterOnlineUser++;
+                    }
+                } else if (startTimeI <= startTimeK) {
+                    if (endTimeI <= endTimeK && endTimeI >= startTimeK) {
+                        counterOnlineUser++;
+                    } else if (endTimeI >= endTimeK) {
+                        counterOnlineUser++;
+                    }
+                }
+            }
+            counter[indexI] = counterOnlineUser;
+        }
+        return counter;
+    }
+
+}
